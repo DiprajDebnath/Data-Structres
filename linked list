@@ -1,0 +1,210 @@
+#include<stdio.h>
+#include<malloc.h>
+struct node
+{
+	int data;
+	struct node *next;
+};
+struct node *head;
+head=NULL;
+
+void insFirst(int );
+void insLast(int );
+void insAnyPos(int ,int );
+void display();
+void delFirst();
+void delLast();
+void delAny(int );
+main()
+{
+	int ch,item,pos;
+	while(1)
+	{
+		printf("1:DISPLAY\n2:INSERT FIRST\n3:INSERT LAST\n4:INSART ANY WHERE\n5:DELETE FIRST\n6:DELETE LAST\n7:DELETE FROM ANY POSITION\n0:EXIT\n");
+		printf("Enter your choice\n");
+		scanf("%d",&ch);
+		switch(ch)
+		{
+			case 1:display();
+			       break;
+			case 2:printf("Enter the item.\n");
+				   scanf("%d",&item);
+				   insFirst(item);
+				   break;
+			case 3:printf("Enter the item.\n");
+				   scanf("%d",&item);
+				   insLast(item);
+				   break;
+			case 4:pritnf("Enter the item.\n");
+				   scanf("%d",&item);
+				   printf("Enter the position.\n");
+				   scanf("%d",&pos);
+				   insAnyPos(item,pos);
+				   break;
+			case 5:delFirst();
+				   break;
+			case 6:delLast();
+				   break;
+			case 7:printf("Enter the position.\n");
+				   scanf("%d",&pos);
+				   delAny(pos);
+				   break;
+			case 0: exit(0);
+		}
+	}
+}
+//function to insert at first.
+void insFirst(int item)
+{
+	struct node *nw;
+	nw=(struct node *)malloc(sizeof(struct node));
+	if(nw==NULL)
+	{
+		printf("Insufficient space.");
+		exit(0);
+	}
+	if(head==NULL)
+	{
+		head=nw;
+		nw->data=item;
+		nw->next=NULL;
+	}
+	else
+	{
+		nw->data=item;
+		nw->next=head;
+	}
+}
+//function to insert at last.
+void insLast(int item)
+{
+	struct node *nw,*p;
+	*p=head;
+	nw=(struct node *)malloc(sizeof(struct node));
+	if(nw==NULL)
+	{
+		printf("Insufficient space.");
+		exit(0);
+	}
+	nw->data=item;
+	nw->next=NULL;
+	if(head==NULL)
+	{
+		head=nw;
+	}
+	else
+		while(p->next!=NULL)
+		{
+			p=p->next;
+		}
+		p->next=nw;
+}
+//function to insert any where.
+void insAny(int item,int pos)
+{
+	struct node *nw,*p;
+	int count=1;
+	*p=head;
+	nw=(struct node *)malloc(sizeof(struct node));
+	if(nw==NULL)
+	{
+		printf("Insufficient space.");
+		exit(0);
+	}
+	nw->data=item;
+	nw->next=NULL;
+	if(head==NULL)
+	{
+		head=nw;
+	}
+	else
+	{
+		
+		while(pos!=count)
+		{
+			p=p->next;
+			count++;
+		}
+		nw->next=p->next;
+		p->next=nw;	
+	}
+}
+//Delete first
+void delFirst()
+{
+	struct node *p;
+	p=head;
+	if(head==NULL)
+	{
+		printf("No item.");
+		exit(0);
+	}
+	else
+	{
+		head=p->next;
+		free(p);
+	}
+}
+//Delete last
+void delLast()
+{
+	struct node *p,*q;
+	p=head;
+	if(head==NULL)
+	{
+		printf("No item.");
+		exit(0);
+	}
+	else
+	{
+		while(p->next!=NULL)
+		{
+			p=q; 
+			p=p->next;
+		}
+		q->next=NULL;
+		free(p);
+	}
+}
+//Delete any
+void delAny(int pos)
+{
+	struct node *p,*q;
+	int count=1;
+	p=head;
+	if(head==NULL)
+	{
+		printf("No item.");
+		exit(0);
+	}
+	else
+	{
+		while(pos!=count)
+		{
+			q=p;
+			p=p->next;
+			count++;
+		}
+		q->next=p->next;
+		free(p);
+	}
+}
+//display function
+void display()
+{
+	struct node *p;
+	p=head;
+	if(head==NULL)
+	{
+		printf("Nothing to display.");
+		exit(0);
+	}
+	else
+	{
+		while(p->next!=NULL)
+		{ 
+			printf("data=%d ,next=%d",*(p->data),*(p->next));
+			p=p->next;
+		}
+	}
+}
