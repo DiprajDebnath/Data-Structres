@@ -1,12 +1,14 @@
-#include<stdio.h>
-#include<malloc.h>
+#include <stdio.h>
+#include <malloc.h>
+#include <stdlib.h>
+
 struct node
 {
 	int data;
 	struct node *next;
 };
-struct node *head;
-head=NULL;
+
+struct node *head=NULL;
 
 void insFirst(int );
 void insLast(int );
@@ -15,7 +17,8 @@ void display();
 void delFirst();
 void delLast();
 void delAny(int );
-main()
+
+void main()
 {
 	int ch,item,pos;
 	while(1)
@@ -35,7 +38,7 @@ main()
 				   scanf("%d",&item);
 				   insLast(item);
 				   break;
-			case 4:pritnf("Enter the item.\n");
+			case 4:printf("Enter the item.\n");
 				   scanf("%d",&item);
 				   printf("Enter the position.\n");
 				   scanf("%d",&pos);
@@ -79,7 +82,7 @@ void insFirst(int item)
 void insLast(int item)
 {
 	struct node *nw,*p;
-	*p=head;
+	p=head;
 	nw=(struct node *)malloc(sizeof(struct node));
 	if(nw==NULL)
 	{
@@ -100,11 +103,11 @@ void insLast(int item)
 		p->next=nw;
 }
 //function to insert any where.
-void insAny(int item,int pos)
+void insAnyPos(int item,int pos)
 {
 	struct node *nw,*p;
 	int count=1;
-	*p=head;
+	p=head;
 	nw=(struct node *)malloc(sizeof(struct node));
 	if(nw==NULL)
 	{
@@ -203,7 +206,7 @@ void display()
 	{
 		while(p->next!=NULL)
 		{ 
-			printf("data=%d ,next=%d",*(p->data),*(p->next));
+			printf("data=%d ,next=%d",(p->data),(p->next));
 			p=p->next;
 		}
 	}
