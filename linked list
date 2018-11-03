@@ -16,15 +16,16 @@ void display();
 void delFirst();
 void delLast();
 void delAny(int );
+void revLL();
 main()
 {
 	int ch,item,pos;
 	while(1)
 	{
-		printf("1:DISPLAY\n2:INSERT FIRST\n3:INSERT LAST\n4:INSART ANY WHERE\n5:DELETE FIRST\n6:DELETE LAST\n7:DELETE FROM ANY POSITION\n0:EXIT\n");
+		printf("1:DISPLAY\n2:INSERT FIRST\n3:INSERT LAST\n4:INSART ANY WHERE\n5:DELETE FIRST\n6:DELETE LAST\n7:DELETE FROM ANY POSITION\n8:Reverse\n0:EXIT\n");
 		printf("Enter your choice\n");
 		scanf("%d",&ch);
-		printf("_____________________________________\n");
+		printf("____________________\t");
 		switch(ch)
 		{
 			case 1:display();
@@ -51,6 +52,8 @@ main()
 				   scanf("%d",&pos);
 				   delAny(pos);
 				   break;
+			case 8:revLL();
+			       break;
 			case 0: exit(0);
 			default:printf("Wrong choice\n");
 		}
@@ -126,7 +129,7 @@ void insAnyPos(int item,int pos)
 	else
 	{
 		p=head;
-		while((pos-1)!=count)
+		while(pos!=count)
 		{
 			p=p->next;
 			count++;
@@ -196,7 +199,7 @@ void delAny(int pos)
 //display function
 void display()
 {
-	struct node *p;//*q;
+	struct node *p;
 	if(head==NULL)
 	{
 		printf("Nothing to display.\n");
@@ -206,10 +209,26 @@ void display()
 		p=head;
 		while(p->next!=NULL)
 		{ 
-			//q=p;
 			printf("data=%d\n",p->data);
 			p=p->next;
 		}
 		printf("data=%d\n\n",p->data);// to print the last item
 	}
+}
+//To reverse the linked list
+void revLL()
+{
+	struct node *p,*q,*r;
+	p=head;
+	q=p->next;
+	r=NULL;
+	while(p->next != NULL)
+	{
+		p->next=r;
+		r=p;
+		p=q;
+		q=p->next;
+	}
+	p->next=r;
+	head=p;
 }
