@@ -25,7 +25,7 @@ main()
 		printf("1:DISPLAY\n2:INSERT FIRST\n3:INSERT LAST\n4:INSART ANY WHERE\n5:DELETE FIRST\n6:DELETE LAST\n7:DELETE FROM ANY POSITION\n8:Reverse\n0:EXIT\n");
 		printf("Enter your choice\n");
 		scanf("%d",&ch);
-		printf("____________________\t");
+		printf("_____________________________________\n");
 		switch(ch)
 		{
 			case 1:display();
@@ -53,7 +53,7 @@ main()
 				   delAny(pos);
 				   break;
 			case 8:revLL();
-			       break;
+				   break;
 			case 0: exit(0);
 			default:printf("Wrong choice\n");
 		}
@@ -129,7 +129,7 @@ void insAnyPos(int item,int pos)
 	else
 	{
 		p=head;
-		while(pos!=count)
+		while((pos-1)!=count)
 		{
 			p=p->next;
 			count++;
@@ -199,7 +199,7 @@ void delAny(int pos)
 //display function
 void display()
 {
-	struct node *p;
+	struct node *p;//*q;
 	if(head==NULL)
 	{
 		printf("Nothing to display.\n");
@@ -209,6 +209,7 @@ void display()
 		p=head;
 		while(p->next!=NULL)
 		{ 
+			//q=p;
 			printf("data=%d\n",p->data);
 			p=p->next;
 		}
