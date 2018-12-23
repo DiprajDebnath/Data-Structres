@@ -19,13 +19,15 @@ main()
 }
 void bublSort(int A[],int n)
 {
-	int i,j;
-	for(i=0;i<n-1;i++)//number of pass n-1
+	int i,j,flag=0;
+	for(i=0;i<n-1 && flag=0;i++)//number of pass n-1
 	{
+		flag=1;
 		for(j=0;j<n-1-i;j++)//number of comparisons n-1-i
 		{
 			if(A[j]>A[j+1])
 			swap(&A[j],&A[j+1]);
+			flag=0;
 		}
 	}
 }
